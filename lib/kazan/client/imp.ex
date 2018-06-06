@@ -56,12 +56,11 @@ defmodule Kazan.Client.Imp do
         nil ->
           request_options
 
-        pid ->
-          request_options ++
-            [
-              stream_to: pid,
-              recv_timeout: Keyword.get(options, :recv_timeout, 15000)
-            ]
+        pid when is_pid(pid) ->
+          request_options ++ [
+            stream_to: pid,
+            recv_timeout: Keyword.get(options, :recv_timeout, 15000)
+          ]
       end
 
     res =
