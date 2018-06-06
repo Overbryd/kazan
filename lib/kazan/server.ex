@@ -95,6 +95,12 @@ defmodule Kazan.Server do
         %{token: _} = token_auth ->
           struct(Server.TokenAuth, token_auth)
 
+        %{certfile: certfile, keyfile: keyfile} ->
+          %Server.CertificateAuth{
+            certificate: cert_from_pem(Path.expand(certfile), "/"),
+            key: private_key_from_pem(Path.expand(keyfile), "/")
+          }
+
         %{certificate: _, key: _} = cert_auth ->
           struct(Server.CertificateAuth, cert_auth)
 

@@ -134,7 +134,7 @@ defmodule Kazan.Client.Imp do
             Server.in_cluster()
 
           # TODO: tests & docs.
-          %{} = map ->
+          map when is_map(map) ->
             Server.from_map(map)
         end
 
