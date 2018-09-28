@@ -247,6 +247,8 @@ defmodule Kazan.Server do
     cert_from_base64(certdata)
   end
 
+  defp get_cert(%{"insecure-skip-tls-verify" => true}, _), do: nil
+
   @spec auth_from_user(Map.t(), String.t()) :: auth_t
   defp auth_from_user(
          %{"client-certificate" => cert_file, "client-key" => key_file},
